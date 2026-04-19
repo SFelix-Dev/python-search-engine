@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Python Search Engine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            margin-top: 120px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 400px;
+            max-width: 90%;
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 24px;
+            padding: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        button {
+            border: none;
+            background: #4285f4;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .info {
+            margin-top: 15px;
+            font-size: 13px;
+            color: gray;
+        }
+
+        .results {
+            margin-top: 40px;
+            width: 500px;
+            max-width: 90%;
+            text-align: left;
+        }
+
+        .result-card {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-title {
+            font-size: 18px;
+            color: #1a0dab;
+        }
+
+        .result-desc {
+            font-size: 14px;
+            color: #4d5156;
+        }
+
+        .logo {
+    font-size: 52px;
+    font-weight: bold;
+
+    background: linear-gradient(90deg, #2563eb, #60a5fa, #38bdf8);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    margin-bottom: 30px;
+}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 class="logo">Search</h1>
+   
+    <form method="POST">
+        <div class="search-box">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Go</button>
+        </div>
+    </form>
+
+    <div class="info">
+        Demo search engine • Try typing 'Python', 'data', or 'coding' to see some results!
+    </div>
+</div>
+
+<!-- RESULTS -->
+{% if results %}
+    <div class="results">
+        {% for r in results %}
+            <div class="result-card">
+                <div class="result-title">Result {{ loop.index }}</div>
+                <div class="result-desc">{{ r }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% elif request.method == 'POST' %}
+    <p style="margin-top:20px;">
+        No results found. Try "python" or "data".
+    </p>
+{% endif %}
+
+</body>
+</html>
